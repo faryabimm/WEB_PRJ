@@ -1,0 +1,16 @@
+.each-cell{
+    background-color: transparent;
+    color: black;
+    border: 2px solid black;
+    /*transition-duration: 0.4s;*/
+    height: 47.5px;
+    width: 75.5px;
+    text-align: center;
+    font-weight: bold;
+
+}
+.each-cell:hover{
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
