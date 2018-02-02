@@ -5,18 +5,40 @@ class Cell extends Component{
         super(props);
         this.state={
             tar:props.tar,
-            num:props.num
+            num:props.num,
+            whichPlayer:'Empty',
 
         }
 
 
     }
 
+    handleEvent(event){
+
+    }
+
     render(){
-        return <button className='each-cell'>
-            {this.state.num}|
-            {this.state.tar}
-            </button>
+        if(this.state.whichPlayer == 'Empty')
+            return (
+                <div className='each-cell'>
+                    {/*{this.state.num}*/}
+                </div>)
+        else if(this.state.whichPlayer == 'Two')
+            return (
+                <div className='each-cell'>
+                 <img className='img1' src={require('./mohrehDotaii.png')}/>
+            </div>)
+        else if(this.state.whichPlayer == 'P1')
+            return (
+                <div className='each-cell'>
+                    <img className='img1' src={require('./mohrehSoorati.png')}/>
+                </div>)
+        else if(this.state.whichPlayer == 'P2')
+            return (
+                <div className='each-cell'>
+                    <img className='img1' src={require('./mohrehSabz.png')}/>
+                </div>)
+
     }
 
     onClick(){
