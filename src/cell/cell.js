@@ -9,6 +9,7 @@ class Cell extends Component{
 
         }
 
+
     }
 
     render(){
@@ -16,6 +17,10 @@ class Cell extends Component{
             {this.state.num}|
             {this.state.tar}
             </button>
+    }
+
+    onClick(){
+
     }
 }
 
