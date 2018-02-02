@@ -3,8 +3,10 @@ import './Grid.css'
 import Cell from '../Cell/Cell'
 
 class Grid extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+
+        this.data_manager = props.data_manager;
         let targets = [
             [-1,-1,77,-1,-1,-1,-1,-1,-1,-1],
             [-1,-1,-1,-1,-1,96,25,-1,-1,-1],
@@ -19,9 +21,9 @@ class Grid extends React.Component {
         ];
 
         let rows=[];
-        for(var i =0 ; i< 10 ; i++){
+        for(let i =0 ; i< 10 ; i++){
             let cells=[];
-            for(var j = 0 ; j < 10 ; j++ ){
+            for(let j = 0 ; j < 10 ; j++ ){
                 if(i%2 === 0)
                     cells.push(<td cellPadding={0} cellSpacing={0}><Cell id={10*i+j+1} num={10*i+j+1} tar={targets[9-i][j]}/></td>)
                 else
