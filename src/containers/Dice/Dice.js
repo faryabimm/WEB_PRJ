@@ -7,6 +7,10 @@ class Dice extends Component {
         return (
             <div>
                 <ReactDice className='Dice1'
+                           // style={'border-radius:2px'}
+                           outline
+                           faceColor='#fbfbfb'
+                           dotColor='#ff0000'
                            numDice='1'
                            rollDone={this.rollDoneCallback}
                            ref={dice => this.reactDice = dice}
