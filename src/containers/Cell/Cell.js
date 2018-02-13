@@ -18,6 +18,13 @@ class Cell extends Component{
     }
 
     render(){
+        if(this.state.tar === undefined){
+            return (
+                <div className='center-column'>
+                    {/*{this.state.num}*/}
+                </div>
+            )
+        }
         if(this.state.whichPlayer == 'Empty')
             return (
                 <div className='each-cell'>
@@ -26,17 +33,17 @@ class Cell extends Component{
         else if(this.state.whichPlayer == 'Two')
             return (
                 <div className='each-cell'>
-                 <img className='img1' src={require('./mohrehDotaii.png')}/>
+                 <img className='img1' src={require('./Twos.png')}/>
             </div>)
         else if(this.state.whichPlayer == 'P1')
             return (
                 <div className='each-cell'>
-                    <img className='img1' src={require('./mohrehSoorati.png')}/>
+                    <img className='img1' src={require('./Blue.png')}/>
                 </div>)
         else if(this.state.whichPlayer == 'P2')
             return (
                 <div className='each-cell'>
-                    <img className='img1' src={require('./mohrehSabz.png')}/>
+                    <img className='img1' src={require('./Yellow.png')}/>
                 </div>)
 
     }
