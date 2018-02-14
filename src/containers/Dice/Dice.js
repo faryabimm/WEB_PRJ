@@ -14,6 +14,7 @@ class Dice extends Component {
                            numDice='1'
                            rollDone={this.rollDoneCallback}
                            ref={dice => this.reactDice = dice}
+                           dieSize='100'
                 />
             </div>
         );
