@@ -18,9 +18,9 @@ class HUD extends React.Component{
         return (
             <div>
                 <div>
-                    <button>{turn}</button>
-                    <button>{100 - p1pos}</button>
-                    <button>{100 - p2pos}</button>
+                    <button className='HUD-button'>{turn}</button>
+                    <button className='HUD-button' l>{100 - p1pos}</button>
+                    <button className='HUD-button'>{100 - p2pos}</button>
                 </div>
             </div>
         );
