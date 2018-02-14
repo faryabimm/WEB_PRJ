@@ -20,7 +20,7 @@ export default class App extends React.Component {
                 </header>
 
                 <main>
-                    <SNL/>
+                    <LoginPage/>
                 </main>
             </div>
         )

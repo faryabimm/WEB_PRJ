@@ -45,8 +45,8 @@ class LoginPage extends Component {
                                     <input type='text' className='username-input vertical-alignment input-style'
                                            id='UserName' placeholder='Username'/>
                                     {/*<p className='input-upper-text'>Password:</p>*/}
-                                    <input type='password' className='password-input vertical-alignment input-style'
-                                           id='PassWord' placeholder='Password'/>
+                                    {/*<input type='password' className='password-input vertical-alignment input-style'*/}
+                                           {/*id='PassWord' placeholder='Password'/>*/}
                                 </div>
                                 <div className='buttons-container'>
                                     <button onClick={this.login_button} className='Login-button button-style'>Login</button>
@@ -70,7 +70,7 @@ class LoginPage extends Component {
 
     login_button() {
         let username = document.getElementById('UserName').value;
-        let password = document.getElementById('PassWord').value;
+        // let password = document.getElementById('PassWord').value;
 
         this.get_game_data(username);
         // if (check_account(username, password)) {
