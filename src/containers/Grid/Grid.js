@@ -68,7 +68,14 @@ const Grid = props => {
     let rows = [];
     for (let i = 0; i < 10; i++) {
         let cells = [];
+        let e = false;
         for (let j = 0; j < 10; j++) {
+            if(j==5 && !e){
+                cells.push(<td cellPadding={0} cellSpacing={0}><Cell classId={'center-column'} num={10*i+j+1} /></td>)
+                e=true;
+                j=4;
+                continue;
+            }
             if (i % 2 === 0)
                 cells.push(<td cellPadding={0} cellSpacing={0}><Cell id={10 * i + j + 1} num={10 * i + j + 1}
                                                                      tar={targets[9 - i][j]}/></td>)

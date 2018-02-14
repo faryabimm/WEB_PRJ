@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '../Grid/Grid';
 import Dice from '../Dice/Dice';
+import HUD from "../HUD/HUD";
 
 
 export default class SNL extends React.Component {
@@ -25,7 +26,12 @@ export default class SNL extends React.Component {
             <div className="flex-row-container">
                 <Grid/>
                 <Dice game_id={game_id} player_id={player_id}/>
+                <div>
+                    <HUD/>
+                </div>
             </div>
+
+
         );
     }
 }

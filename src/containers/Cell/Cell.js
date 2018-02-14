@@ -6,24 +6,31 @@ import {bindActionCreators} from "redux";
 
 class Cell extends Component {
     render() {
+        if (this.props.tar === undefined) {
+            debugger;
+            return (
+                <div className={'center-column'}></div>
+            );
+        }
+
         if (+this.props.id === +this.props.posP1) {
             if (+this.props.id === +this.props.posP2) {
                 return (
                     <div className='each-cell'>
-                        <img className='img1' src={require('./mohrehDotaii.png')}/>
+                        <img className='img1' src={require('./Twos.png')}/>
                     </div>
                 );
             } else {
                 return (
                     <div className='each-cell'>
-                        <img className='img1' src={require('./mohrehSoorati.png')}/>
+                        <img className='img1' src={require('./Blue.png')}/>
                     </div>
                 );
             }
         } else if (+this.props.id === +this.props.posP2) {
             return (
                 <div className='each-cell'>
-                    <img className='img1' src={require('./mohrehSabz.png')}/>
+                    <img className='img1' src={require('./Yellow.png')}/>
                 </div>
             );
         } else {
@@ -36,7 +43,8 @@ class Cell extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
+    ...ownProps,
     turn: state.stateManager.turn,
     posP1: state.stateManager.posP1,
     posP2: state.stateManager.posP2,

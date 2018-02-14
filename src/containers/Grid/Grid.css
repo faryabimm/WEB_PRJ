@@ -3,5 +3,6 @@
     padding-left: 24px;
     background-image: url("map.jpg");
     background-size: 810px 540px;
+    /*border: 2px;*/
     background-repeat: no-repeat;
 }

@@ -1,4 +1,5 @@
 .die {
+    border-radius: 2px;
     -webkit-transition: -webkit-transform .2s ease;
     transition: -webkit-transform .2s ease;
     transition: transform .2s ease;
@@ -109,7 +110,7 @@
     height: 60px;
     width: 60px;
     position: absolute;
-    background: #3e6fa0
+    background: navajowhite;
 }
 
 .die .dot {
