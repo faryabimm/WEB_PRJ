@@ -1,49 +1,52 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './Cell.css';
-class Cell extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            tar:props.tar,
-            num:props.num,
-            whichPlayer:'Empty',
 
-        }
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
-
-    }
-
-    handleEvent(event){
-
-    }
-
-    render(){
-        if(this.state.whichPlayer == 'Empty')
-            return (
-                <div className='each-cell'>
-                    {/*{this.state.num}*/}
-                </div>)
-        else if(this.state.whichPlayer == 'Two')
-            return (
-                <div className='each-cell'>
-                 <img className='img1' src={require('./mohrehDotaii.png')}/>
-            </div>)
-        else if(this.state.whichPlayer == 'P1')
-            return (
-                <div className='each-cell'>
-                    <img className='img1' src={require('./mohrehSoorati.png')}/>
-                </div>)
-        else if(this.state.whichPlayer == 'P2')
+class Cell extends Component {
+    render() {
+        if (+this.props.id === +this.props.posP1) {
+            if (+this.props.id === +this.props.posP2) {
+                return (
+                    <div className='each-cell'>
+                        <img className='img1' src={require('./mohrehDotaii.png')}/>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className='each-cell'>
+                        <img className='img1' src={require('./mohrehSoorati.png')}/>
+                    </div>
+                );
+            }
+        } else if (+this.props.id === +this.props.posP2) {
             return (
                 <div className='each-cell'>
                     <img className='img1' src={require('./mohrehSabz.png')}/>
-                </div>)
-
-    }
-
-    onClick(){
-
+                </div>
+            );
+        } else {
+            return (
+                <div className='each-cell'>
+                    {/*{this.state.num}*/}
+                </div>
+            );
+        }
     }
 }
 
-export default Cell;
+const mapStateToProps = state => ({
+    turn: state.stateManager.turn,
+    posP1: state.stateManager.posP1,
+    posP2: state.stateManager.posP2,
+    diceIsDisabled: state.stateManager.diceIsDisabled,
+    P1LoggedIn: state.stateManager.P1LoggedIn,
+    P2LoggedIn: state.stateManager.P2LoggedIn,
+    P1_last_cast: state.stateManager.P1_last_cast,
+    P2_last_cast: state.stateManager.P2_last_cast,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cell)
