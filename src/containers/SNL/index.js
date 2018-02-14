@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '../Grid/Grid';
 import Dice from '../Dice/Dice';
 import HUD from "../HUD/HUD";
+import './index.css'
 
 
 export default class SNL extends React.Component {
@@ -23,9 +24,13 @@ export default class SNL extends React.Component {
         let player_id = SNL.getParameterByName('player_id');
         let game_id = SNL.getParameterByName('game_id');
         return (
-            <div className="flex-row-container">
-                <Grid/>
-                <Dice game_id={game_id} player_id={player_id}/>
+            <div className='flex-row-container'>
+                <div className='flex-col-container'>
+                    <Grid />
+                    <Dice  game_id={game_id} player_id={player_id}/>
+                </div>
+                <div className='HUD'><HUD className='flex-row-container' /></div>
+
             </div>
 
 

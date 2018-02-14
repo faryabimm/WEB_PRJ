@@ -19,12 +19,13 @@ class LeaderBoeard extends React.Component{
             return b.Score-a.Score;
         })
         let rows=[];
+        rows.push(<tr><th>LeaderBoard</th></tr>)
         rows.push(<tr>{[<td></td>,<td>Username</td>,<td>Score</td>]}</tr>);
         for(var i =0;i<LeaderBoardMembers.length;i++){
             let cells=[];
-            cells.push(<td>{i+1}</td>);
-            cells.push(<td>{LeaderBoardMembers[i].Username}</td>);
-            cells.push(<td>{LeaderBoardMembers[i].Score}</td>);
+            cells.push(<td><button className='leaderboard-cells'>{i+1}</button></td>);
+            cells.push(<td><button className='leaderboard-cells'>{LeaderBoardMembers[i].Username}</button></td>);
+            cells.push(<td><button className='leaderboard-cells'>{LeaderBoardMembers[i].Score}</button></td>);
             rows.push(<tr>{cells}</tr>);
         }
 

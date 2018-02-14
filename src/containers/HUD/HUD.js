@@ -1,9 +1,12 @@
 import React from 'react';
 import {other_player, this_player} from "../../modules/stateManager";
+import LeaderBoard from '../../containers/LeaderBoeard/LeaderBoeard'
+import './HUD.css'
 
 
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import LeaderBoeard from "../LeaderBoeard/LeaderBoeard";
 
 class HUD extends React.Component{
     constructor(props){
@@ -16,13 +19,17 @@ class HUD extends React.Component{
         let p2pos = this.props.posP2;
 
         return (
-            <div>
-                <div>
-                    <button className='HUD-button'>{turn}</button>
-                    <button className='HUD-button' l>{100 - p1pos}</button>
-                    <button className='HUD-button'>{100 - p2pos}</button>
+            <div >
+                <div >
+                    <div className='buttons-container-2'>
+                        <button className='HUD-button'>Turn: {turn}</button>
+                        <button className='HUD-button'>Cells Left For P1: {100 - p1pos}</button>
+                        <button className='HUD-button'>Cells Left For P2: {100 - p2pos}</button>
+                    </div>
                 </div>
+                <LeaderBoeard/>
             </div>
+
         );
     }
 
