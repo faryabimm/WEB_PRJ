@@ -5,57 +5,31 @@ import RegisterPage from '../../containers/Register/RegisterPage';
 import SNL from "../SNL";
 import Parse from "parse";
 
+let db_write_handle = Parse.Object.extend("User");
 
 class LoginPage extends Component {
     constructor() {
         super();
-        this.state = {
-            isOnLoginPage: true,
-            isOnGamePage: false,
-        };
-        this.db_write_handle = Parse.Object.extend("User");
+
+        debugger;
+        if (document.location.href.lastIndexOf('?') === -1) {
+            this.state = {
+                isOnLoginPage: true,
+                isOnGamePage: false,
+            };
+        } else {
+            this.state = {
+                isOnLoginPage: false,
+                isOnGamePage: true,
+            };
+        }
+
+
+
+        this.get_game_data = this.get_game_data.bind(this);
+        this.initiate_game = this.initiate_game.bind(this);
+        this.login_button = this.login_button.bind(this);
     }
-
-
-    create_account(username, password) {
-        let record = new this.db_write_handle();
-        record.set("username", username);
-        record.set("password", password);
-
-        record.save(null, {
-            success: function (id) {
-                console.log('New move added to database created with objectId: ' + id.id);
-            },
-            error: function (gameScore, error) {
-                console.error('Failed to create new move, with error code: ' + error.message);
-            }
-        });
-    }
-
-    check_account(username, password) {
-        let query = new Parse.Query(this.db_write_handle);
-        query.equalTo("username", username).equalTo("password", password);
-        query.find({
-            success: function (results) {
-                if (results.size  <= 0) {
-                    return false
-                }
-                let a = results[0].get('message');
-                console.log(a)
-                return true;
-
-
-                // TODO_DONE OBTAIN GAME ID AND PLAYER ID FROM SERVER AND START GAME
-
-
-            },
-            error: function (error) {
-                alert("Error: " + error.code + " " + error.message);
-                return false;
-            }
-        });
-    }
-
 
     render() {
         if (this.state.isOnGamePage) {
@@ -75,8 +49,8 @@ class LoginPage extends Component {
                                            id='PassWord' placeholder='Password'/>
                                 </div>
                                 <div className='buttons-container'>
-                                    <button onClick={login_button} className='Login-button button-style'>Login</button>
-                                    <button onClick={get_game_data}
+                                    <button onClick={this.login_button} className='Login-button button-style'>Login</button>
+                                    <button onClick={this.get_game_data}
                                             className='Register-button-2 button-style'>Register
                                     </button>
                                 </div>
@@ -93,7 +67,55 @@ class LoginPage extends Component {
 
 
     }
+
+    login_button() {
+        let username = document.getElementById('UserName').value;
+        let password = document.getElementById('PassWord').value;
+
+        this.get_game_data(username);
+        // if (check_account(username, password)) {
+        //     debugger;
+        // }
+
+
+
+    }
+
+    get_game_data(username) {
+        let r = new Rest();
+        let p = r.makeAjaxCall('http://localhost:3001/enter', 'GET');
+        p.then((result) => {
+                return this.initiate_game(result, username);
+            },
+            (err) => {
+                console.log(err);
+            });
+    }
+
+
+
+
+    initiate_game(data, username) {
+        let game_id, player_id, game_ready;
+
+        ({player_id, game_id, game_ready} = data);
+        console.log(player_id);
+        console.log(game_id);
+        console.log(game_ready);
+
+        document.location.href += `?player_id=${player_id}&game_id=${game_id}&game_ready=${game_ready}&user_name=${username}`;
+        this.setState(
+            {
+                isOnLoginPage: false,
+                isOnGamePage: true,
+            }
+        );
+    }
+
+
 }
+
+export default LoginPage;
 
 class Rest {
     makeAjaxCall(url, methodType) {
@@ -123,42 +145,42 @@ class Rest {
     }
 }
 
+function create_account(username, password) {
+    let record = new db_write_handle();
+    record.set("username", username);
+    record.set("password", password);
 
-function login_button() {
-    let username = document.getElementById('UserName').innerText;
-    let password = document.getElementById('PassWord').innerText;
-
-    if (this.check_account(username, password)) {
-        get_game_data(username)
-    }
-
-
-
-}
-
-function get_game_data(username) {
-    let r = new Rest();
-    let p = r.makeAjaxCall('http://localhost:3001/enter', 'GET');
-    p.then((result) => {
-            return initiate_game(result, username);
+    record.save(null, {
+        success: function (id) {
+            console.log('New move added to database created with objectId: ' + id.id);
         },
-        (err) => {
-            console.log(err);
-        });
+        error: function (gameScore, error) {
+            console.error('Failed to create new move, with error code: ' + error.message);
+        }
+    });
 }
 
+function check_account(username, password) {
+    let query = new Parse.Query(db_write_handle);
+    query.equalTo("username", username).equalTo("password", password);
+    query.find({
+        success: function (results) {
+            if (results.size  <= 0) {
+                return true
+            }
+            let a = results[0].get('message');
+            console.log(a);
+            return true;
 
-function initiate_game(data, username) {
-    let game_id, player_id, game_ready;
 
-    ({player_id, game_id, game_ready} = data);
-    console.log(player_id);
-    console.log(game_id);
-    console.log(game_ready);
+            // TODO_DONE OBTAIN GAME ID AND PLAYER ID FROM SERVER AND START GAME
 
-    document.location.href += `?player_id=${player_id}&game_id=${game_id}&game_ready=${game_ready}&user_name=${username}`;
 
+        },
+        error: function (error) {
+            alert("Error: " + error.code + " " + error.message);
+            return false;
+        }
+    });
 }
 
-
-export default LoginPage;
