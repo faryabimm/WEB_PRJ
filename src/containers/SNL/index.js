@@ -26,9 +26,6 @@ export default class SNL extends React.Component {
             <div className="flex-row-container">
                 <Grid/>
                 <Dice game_id={game_id} player_id={player_id}/>
-                <div>
-                    <HUD/>
-                </div>
             </div>
 
 
